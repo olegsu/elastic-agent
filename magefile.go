@@ -347,7 +347,8 @@ func AssembleDarwinUniversal() error {
 	args := []string{
 		"build/golang-crossbuild/%s-darwin-universal",
 		"build/golang-crossbuild/%s-darwin-arm64",
-		"build/golang-crossbuild/%s-darwin-amd64"}
+		"build/golang-crossbuild/%s-darwin-amd64",
+	}
 
 	for _, arg := range args {
 		lipoArgs = append(lipoArgs, fmt.Sprintf(arg, devtools.BeatName))
@@ -654,7 +655,7 @@ func packageAgent(requiredPackages []string, packagingFn func()) {
 			dependencies := []string{
 				"auditbeat", "filebeat", "heartbeat", "metricbeat", "osquerybeat", "packetbeat", // beat dependencies
 				"apm-server",
-				// "cloudbeat", // TODO: add once working
+				"cloudbeat",
 				"elastic-agent-shipper",
 				"endpoint-security",
 				"fleet-server",
@@ -1088,7 +1089,6 @@ func prepareIronbankBuild() error {
 		}
 		return nil
 	})
-
 	if err != nil {
 		return fmt.Errorf("cannot create templates for the IronBank: %+v", err)
 	}
